@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+	
+	<!-- 쿼리문작성 -->
+	<!-- 방명록추가 -->
+	<insert id="insert" parameterType="com.mysite.vo.BoardVo">
+		<![CDATA[
+			insert into guestbook(
+									no,
+									name,
+									password,
+									content,
+									reg_date
+							    )
+						 values(
+						 		SEQ_GUESTBOOK_NO.nextval,
+						 		#{name},
+						 		#{password},
+						 		#{content},
+						 		sysdate
+						 		)		
+		]]>
+	
+	</insert>
+	<!-- 방명록 리스트 호출 -->	
+	<select id="selectList" resultType="com.mysite.vo.BoardVo">
+		<![CDATA[
+			select 	no,
+					name,
+					password,
+					content,
+					reg_date
+			from guestbook
+			order by no DESC		
+		]]>	
+	</select>
+	
+
+</mapper>

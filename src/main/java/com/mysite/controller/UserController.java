@@ -91,20 +91,13 @@ public class UserController {
 	public String modify(@ModelAttribute UserVo userVo,HttpSession session) {
 		System.out.println("UserController.modify()");
 				
-		userService.modify(userVo);
 		UserVo authUser =  (UserVo)session.getAttribute("successUser");
-		authUser.setName(userVo.getName());
-		String name = "유상우";
+		userVo.setNo(authUser.getNo());
 		
+		userService.modify(userVo);		
+		authUser.setName(userVo.getName());		
 		
 		return "redirect:/user/modifyForm";
 	}
-	//게스트북
-	@RequestMapping("/board/guestForm")
-	public String guestForm(@ModelAttribute UserVo userVo) {
-		System.out.println("UserController.guestBook()");
 	
-		
-		return "";
-	}
 }
