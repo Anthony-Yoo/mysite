@@ -29,7 +29,8 @@ public class BoardDao {
 	public int deleteGuest(BoardVo boardVo) {
 		System.out.println("Dao.deleteGuest()");
 		
-		return sqlSession.delete("board.delete", boardVo);		
+		return sqlSession.delete("board.delete", boardVo);
+		
 	}
 	
 }

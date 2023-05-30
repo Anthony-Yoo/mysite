@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>방명록</title>
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
@@ -43,7 +43,7 @@
             <!-- //content-head -->
 
 			<div id="guestbook">
-				<form action="" method="">
+				<form action="${pageContext.request.contextPath}/board/delete" method="get">
 					<table id="guestDelete">
 						<colgroup>
 							<col style="width: 10%;">
@@ -53,13 +53,13 @@
 						</colgroup>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" name="pass"></td>
+							<td><input type="password" name="password"></td>
 							<td class="text-left"><button type="submit">삭제</button></td>
-							<td><a href="/guestbook2/gbc">[메인으로 돌아가기]</a></td>
+							<td><a href="${pageContext.request.contextPath}/mysite3/index">[메인으로 돌아가기]</a></td>
 						</tr>
 					</table>
-					<input type='hidden' name="" value="">
-					<input type='hidden' name="" value="">
+					<input type='hidden' name="no" value="${param.no}">
+					<input type='hidden' name="name" value="">
 				</form>
 				
 			</div>

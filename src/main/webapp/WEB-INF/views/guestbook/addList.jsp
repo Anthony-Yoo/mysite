@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>방명록</title>
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
@@ -52,9 +52,9 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<th><label class="form-text" for="input-uname">이름</label></td>
+								<th><label class="form-text" for="input-uname">이름</label></th>
 								<td><input id="input-uname" type="text" name="name"></td>
-								<th><label class="form-text" for="input-pass">패스워드</label></td>
+								<th><label class="form-text" for="input-pass">패스워드</label></th>
 								<td><input id="input-pass" type="password" name="password"></td>
 							</tr>
 							<tr>
@@ -82,7 +82,7 @@
 						<td>${listVo.no}</td>
 						<td>${listVo.name}</td>
 						<td>${listVo.reg_date}</td>
-						<td><a href="${pageContext.request.contextPath}/board/deleteForm">[삭제]</a></td>
+						<td><a href="${pageContext.request.contextPath}/board/deleteForm?no=${listVo.no}">[삭제]</a></td>
 					</tr>
 					<tr>
 						<td colspan=4 class="text-left">${listVo.content}</td>

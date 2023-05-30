@@ -36,6 +36,18 @@
 			order by no DESC		
 		]]>	
 	</select>
+	<!-- 방명록 삭제  -->
+	<delete id="delete" parameterType="com.mysite.vo.BoardVo">
+		<![CDATA[
+			DELETE FROM guestbook
+     		WHERE no = #{no}
+     		AND password = #{password}		
+     		
+		]]>
 	
+	
+	
+	
+	</delete>
 
 </mapper>

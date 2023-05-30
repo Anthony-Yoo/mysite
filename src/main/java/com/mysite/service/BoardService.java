@@ -25,8 +25,8 @@ public class BoardService {
 		
 		return boardDao.insertBoard(boardVo);
 	}
-	public int deleteForm(BoardVo boardVo) {
-		System.out.println("Service. deleteForm()");
+	public int delete(BoardVo boardVo) {
+		System.out.println("Service. delete()");
 		
 		return boardDao.deleteGuest(boardVo);
 	}

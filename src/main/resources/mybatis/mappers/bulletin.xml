@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bulletin">
+
+	<!-- 쿼리문작성 -->
+	<!-- 게시글 입력 -->
+	<insert id="insert" parameterType="com.mysite.vo.BulletinVo">
+		<![CDATA[
+			insert into bulletin(
+									no,
+									title,
+									content,
+									hit,
+									reg_date,
+									user_no
+							    )
+						 values(
+						 		SEQ_BULLETIN_NO.nextval,
+						 		#{title},
+						 		#{content},
+						 		1,
+						 		sysdate,
+						 		#{user_no}
+						 		)
+						 				
+		]]>	
+	</insert>
+	<!-- 게시글리스트 조회 -->
+	<select id="selectList" resultType="com.mysite.vo.BulletinVo">
+		<![CDATA[
+			select  bulletin.no,
+        			bulletin.title,
+        			users.name,
+        			bulletin.hit,
+        			bulletin.reg_date
+			from bulletin
+			join users 
+			on users.no = bulletin.user_no
+			Order by bulletin.no DESC
+		]]>	
+	</select>	
+	<!-- 조회수 증가 -->
+	<update id="updateCount" parameterType="int">
+		<![CDATA[
+			update bulletin
+			set  hit = hit +1
+			where no = #{no}		
+		]]>
+			
+	</update>
+	
+	
+	<!-- 선택게시글조회 -->
+	<select id="selectOne" parameterType="int" resultType="com.mysite.vo.BulletinVo">
+		<![CDATA[
+			select 	bulletin.no,
+					users.name,
+					bulletin.hit,
+					bulletin.reg_date,
+					bulletin.title,
+					bulletin.content
+			from bulletin
+			join users 
+			on users.no = bulletin.user_no
+			where bulletin.no = #{no}	
+		]]>		
+	</select>
+	<!-- 선택글 삭제 -->
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from bulletin
+			where no = #{no}		
+		]]>	
+	</delete>
+	<!-- 선택글 글수정 -->
+	<update id="updateOne" parameterType="com.mysite.vo.BulletinVo">
+		<![CDATA[
+			update bulletin
+			set title = #{title},
+				content = #{content}
+			where no = #{no}		
+		]]>			
+	</update>
+	<!-- 키워드 조회글리스트 -->
+	<select id="selectKeyword" parameterType="String" resultType="com.mysite.vo.BulletinVo">
+		<![CDATA[
+			select  bulletin.no,
+        			bulletin.title,
+        			users.name,
+        			bulletin.hit,
+        			bulletin.reg_date
+			from bulletin
+			join users 
+			on users.no = bulletin.user_no
+			where (bulletin.title || bulletin.content || users.name) like '%'|| #{keyword} ||'%'
+			Order by bulletin.no DESC 		
+		]]>
+	
+	
+	
+	</select>
+	
+</mapper>
