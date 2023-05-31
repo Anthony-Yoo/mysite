@@ -4,6 +4,14 @@
 <mapper namespace="bulletin">
 
 	<!-- 쿼리문작성 -->
+	<!-- 게시글 카운트 -->
+	<select id="selectCount" resultType="int">
+		<![CDATA[
+		
+				select count(*) as totalCount
+				from bulletin
+		]]>
+	</select>
 	<!-- 게시글 입력 -->
 	<insert id="insert" parameterType="com.mysite.vo.BulletinVo">
 		<![CDATA[
@@ -35,11 +43,13 @@
         			bulletin.hit,
         			bulletin.reg_date
 			from bulletin
-			join users 
+			join users  
 			on users.no = bulletin.user_no
 			Order by bulletin.no DESC
+			Offset 0 rows fetch first 10 rows only
 		]]>	
 	</select>	
+	<!-- 			OFFSET 0 ROWS FETCH FIRST 10 ROWS ONLY; -->
 	<!-- 조회수 증가 -->
 	<update id="updateCount" parameterType="int">
 		<![CDATA[
@@ -90,11 +100,15 @@
         			users.name,
         			bulletin.hit,
         			bulletin.reg_date
-			from bulletin
-			join users 
-			on users.no = bulletin.user_no
-			where (bulletin.title || bulletin.content || users.name) like '%'|| #{keyword} ||'%'
-			Order by bulletin.no DESC 		
+					from bulletin
+					join users 
+					on users.no = bulletin.user_no			
+		]]>			 
+			<if test="value !='' and value != 'null'" >
+			where (bulletin.title || bulletin.content || users.name) like '%'|| #{keyword} ||'%'	
+			</if>
+		<![CDATA[			
+					Order by bulletin.no DESC 		
 		]]>
 	
 	
