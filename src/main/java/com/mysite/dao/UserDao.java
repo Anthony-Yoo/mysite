@@ -37,5 +37,11 @@ public class UserDao {
 		System.out.println(userVo);
 		return sqlSession.update("user.updateOne", userVo);
 	}
-	
+	public UserVo selectId(String id) {
+		System.out.println("UserDao.selectId()");
+		
+		return sqlSession.selectOne("user.selectId", id);
+				
+		
+	}
 }

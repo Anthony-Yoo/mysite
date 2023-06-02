@@ -59,5 +59,16 @@
 			no = #{no}		
 		]]>	
 	</update>
-
+	<!-- 	회원확인(Id) -->
+	<select id="selectId" parameterType="String" resultType="com.mysite.vo.UserVo">
+		<![CDATA[
+				select no,
+					   id,
+					   password,					   
+					   name,
+					   gender
+				from users
+				where id = #{id}
+		]]>	
+	</select>
 </mapper>

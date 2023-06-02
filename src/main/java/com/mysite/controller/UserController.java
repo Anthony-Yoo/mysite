@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysite.service.UserService;
 import com.mysite.vo.UserVo;
@@ -98,5 +100,15 @@ public class UserController {
 		
 		return "redirect:/user/modifyForm";
 	}
-	
+	//회원가입 아이디체크
+	@ResponseBody
+	@RequestMapping("/user/idcheck")
+	public UserVo idcheck(@RequestParam("id") String id) {
+		System.out.println("UserController.idcheck");
+		System.out.println(id);
+		
+		UserVo uservo = userService.idcheck(id);
+		
+		return uservo;
+	}
 }

@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
-
 </head>
 
 <body>
@@ -52,7 +52,8 @@
 						<div class="form-group">
 							<label class="form-text" for="input-uid">아이디</label> 
 							<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
-							<button type="button" id="">중복체크</button>
+							<button type="button" id="idCheck">중복체크</button>
+							<p id="idCheckMsg">ㄷㄷㄷ</p>
 						</div>
 
 						<!-- 비밀번호 -->
@@ -108,5 +109,47 @@
 	<!-- //wrap -->
 
 </body>
+<script type="text/javascript">
+$("#idCheck").on("click",function(){
+	console.log("중복체크 버튼호출");
+	
+	var id = $("[name=id]").val();
+	console.log(id);
+	
+	$.ajax({			
+			url : "${pageContext.request.contextPath}/user/idcheck",		
+			type : "post",
+			/* contentType : "application/json", */
+			data : {id: id},
+	
+			dataType : "json",
+			success : function(result){
+				console.log(result);
+				/*성공시 처리해야될 코드 작성*/
+				if(result==null) {		
+					//사용가능
+					$("#idCheckMsg").text(id + "는 사용가능이다 닝겐!")
+				}else {
+					//사용불가
+					$("#idCheckMsg").text(id + "는 사용불가능이다 닝겐!")
+				}
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+	});
+	
+	/* var userVo = {
+			no : 1,
+			name:"홍길동",
+			pass :"1234",
+			gender : "male"			
+	} */
+	
+	
+	
+	
+});
+</script>
 
 </html>

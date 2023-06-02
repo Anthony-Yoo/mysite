@@ -36,4 +36,9 @@ public class UserService {
 		
 		return userDao.updateUser(userVo);
 	}
+	public UserVo idcheck(String id) {
+		System.out.println("UserService.idcheck()");	
+			
+		return userDao.selectId(id);
+	}
 }
