@@ -13,6 +13,12 @@ public class BulletinDao {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	public int selectCount() {
+		System.out.println("BulletinDao.selectCount()");
+		
+		return sqlsession.selectOne("bulletin.selectCount()");
+		
+	}	
 	public int insertBulletin(BulletinVo bulletinVo) {
 		System.out.println("BulletinDao.insertBulletin()");		
 		

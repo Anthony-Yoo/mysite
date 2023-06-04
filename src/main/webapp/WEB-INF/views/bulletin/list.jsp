@@ -49,8 +49,12 @@
 							<button type="submit" id=btn_search>검색</button>
 						</div>
 					</form>
+<<<<<<< HEAD
 					<!-- 리스트반복 시작-->								
 					<c:forEach items="${requestScope.boardList}" var="bulletinVo" begin="0" end="10">			
+=======
+					<!-- 리스트반복 시작-->		
+>>>>>>> branch 'master' of https://github.com/Anthony-Yoo/mysite.git
 					<table>					
 						<thead>
 							<tr>
@@ -62,6 +66,7 @@
 								<th>관리</th>
 							</tr>
 						</thead>
+						<c:forEach items="${requestScope.boardList}" var="bulletinVo">
 						<tbody>
 							<tr>
 								<td>${bulletinVo.no}</td>
@@ -75,31 +80,27 @@
 							</c:when>
 						</c:choose>			
 							</tr>							
-						</tbody>					 
+						</tbody>	
+					    </c:forEach>					 
 					</table>
-					</c:forEach>	
+				
 
 					<!-- 리스트반복 종료 -->	
 					<c:forEach var="page" begin="1" end="10">
 					
 					</c:forEach>
 					<div id="paging">
-						<ul>
-							<li><a href="">◀</a></li>
-							<li><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">4</a></li>
-							<li class="active"><a href="">5</a></li>
-							<li><a href="">6</a></li>
-							<li><a href="">7</a></li>
-							<li><a href="">8</a></li>
-							<li><a href="">9</a></li>
-							<li><a href="">10</a></li>
-							<li><a href="">▶</a></li>
-						</ul>
-						
-						
+						<ul class="paging">
+						    <c:if test="${paging.prev}">
+						        <span><a href='<c:url value="/list?pageNum=${paging.startPage-1}"/>'>이전</a></span>
+						    </c:if>
+						    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+						        <span><a href='<c:url value="/list?pageNum=${num}"/>'>${num}</a></span>
+						    </c:forEach>
+						    <c:if test="${paging.next && paging.endPage>0}">
+						        <span><a href='<c:url value="/list?pageNum=${paging.endPage+1}"/>'>다음</a></span>
+						    </c:if>
+						</ul>							
 						<div class="clear"></div>
 					</div>
 					<c:choose>

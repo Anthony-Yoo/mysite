@@ -2,7 +2,7 @@ package com.mysite.vo;
 
 import java.util.List;
 
-public class BulletinVo {
+public class BulletinVo extends CriteriaVo {
 	private int no;
 	private String title;
 	private String content;

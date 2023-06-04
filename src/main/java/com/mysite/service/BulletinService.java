@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mysite.dao.BulletinDao;
 import com.mysite.vo.BulletinVo;
+import com.mysite.vo.PageVo;
 
 @Service
 public class BulletinService {
@@ -19,7 +20,16 @@ public class BulletinService {
 						
 		return bulletinDao.insertBulletin(bulletinVo);
 	}
+<<<<<<< HEAD
 	public List<BulletinVo> list(BulletinVo bulletinVo) {
+=======
+	public int totalCount(PageVo pageVo) {
+		System.out.println("BulletinService.pagingService()");		
+		
+		return bulletinDao.selectCount(pageVo);
+	}
+	public List<BulletinVo> list() {
+>>>>>>> branch 'master' of https://github.com/Anthony-Yoo/mysite.git
 		System.out.println("BulletinService.list()");
 		
 		List<BulletinVo> bulletinList = bulletinDao.List();
