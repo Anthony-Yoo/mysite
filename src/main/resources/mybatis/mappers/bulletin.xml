@@ -49,7 +49,6 @@
 			Offset 0 rows fetch first 10 rows only
 		]]>	
 	</select>	
-<<<<<<< HEAD
 	<!-- 페이징게시글리스트 조회 -->
 	<select id="pagingList" parameterType="com.mysite.vo.BulletinVo" resultType="com.mysite.vo.BulletinVo">
 		<![CDATA[
@@ -64,10 +63,7 @@
 			Order by bulletin.no DESC
             OFFSET ((#{pageNum}-1)*${maxCulumn}) ROWS FETCH FIRST ${maxCulumn} ROWS ONLY;
 		]]>	
-	</select>
-=======
-	<!-- 			OFFSET 0 ROWS FETCH FIRST 10 ROWS ONLY; -->
->>>>>>> branch 'master' of https://github.com/Anthony-Yoo/mysite.git
+	</select>	
 	<!-- 조회수 증가 -->
 	<update id="updateCount" parameterType="int">
 		<![CDATA[
@@ -132,5 +128,4 @@
 	
 	
 	</select>
-	
-</mapper>
+</mapper>	

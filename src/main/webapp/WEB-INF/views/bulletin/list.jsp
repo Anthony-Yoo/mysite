@@ -48,14 +48,8 @@
 							<input type="text" name="keyword" placeholder="제목/글쓴이 검색">
 							<button type="submit" id=btn_search>검색</button>
 						</div>
-					</form>
-<<<<<<< HEAD
-					<!-- 리스트반복 시작-->								
-					<c:forEach items="${requestScope.boardList}" var="bulletinVo" begin="0" end="10">			
-=======
-					<!-- 리스트반복 시작-->		
->>>>>>> branch 'master' of https://github.com/Anthony-Yoo/mysite.git
-					<table>					
+					</form>					
+					<table>				
 						<thead>
 							<tr>
 								<th>번호</th>
@@ -66,6 +60,7 @@
 								<th>관리</th>
 							</tr>
 						</thead>
+						<!-- 리스트반복 시작-->
 						<c:forEach items="${requestScope.boardList}" var="bulletinVo">
 						<tbody>
 							<tr>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.mysite.service.BulletinService;
 import com.mysite.vo.BulletinVo;
 import com.mysite.vo.CriteriaVo;
@@ -21,68 +22,10 @@ import com.mysite.vo.UserVo;
 
 @Controller
 public class BulletinController {
-<<<<<<< HEAD
 		
 		@Autowired
-		private BulletinService bulletinService;
-		
-		@RequestMapping(value = "/bulletin/list",method = {RequestMethod.GET,RequestMethod.POST})
-		public String ListandCount(@ModelAttribute BulletinVo bulletinVo, Model model) {
-			System.out.println("BulletinController.ListandCouint");			
-			
-			bulletinVo.getMaxCulumn();
-			
-			
-//			List<BulletinVo> boardList = bulletinService.list();
-			List<BulletinVo> boardList = bulletinService.list(bulletinVo);
-			System.out.println(boardList);		
-			model.addAttribute("boardList",boardList);
-			
-			
-			return "/WEB-INF/views/bulletin/list.jsp";
-		}
-		
-		@RequestMapping("/bulletin/search")
-		public String search(@RequestParam String keyword,Model model) {
-			System.out.println("BulletinController.search()");
-			
-			List<BulletinVo> keyList = bulletinService.search(keyword);
-			System.out.println("keyList");
-			model.addAttribute("boardList", keyList);
-			
-			return "/WEB-INF/views/bulletin/list.jsp";
-		}			
-		/*
-		 * @RequestMapping("/bulletin/list") 
-		 * public ModelAndView list(ModelAndView mav) { 
-		 * System.out.println("BulletinController.list()");
-		 * 
-		 * List<HashMap<String, Object>> bulletinList = bulletinService.list();
-		 * System.out.println(bulletinList); 
-		 * mav.addObject("bList", bulletinList);
-		 * mav.setViewName("/WEB-INF/views/bulletin/list.jsp");
-		 * 
-		 * return mav; }
-		 */
-		@RequestMapping(value = "/bulletin/writeForm",method = {RequestMethod.GET,RequestMethod.POST})
-		public String writeForm() {
-			System.out.println("BulletinController.writeForm()");
-			
-			
-			return "/WEB-INF/views/bulletin/writeForm.jsp";
-			
-		}
-		@RequestMapping("/bulletin/write")
-		public String write(@ModelAttribute BulletinVo bulletinVo,HttpSession session) {
-			System.out.println("BulletinController.write()");
-			
-			UserVo bulletinUser = (UserVo)session.getAttribute("successUser");
-			bulletinVo.setUser_no(bulletinUser.getNo());
-=======
-
-	@Autowired
-	private BulletinService bulletinService;
-
+		private BulletinService bulletinService;		
+	
 	
 	 @RequestMapping(value = "/bulletin/list",method = {RequestMethod.GET,RequestMethod.POST}) 
 	 public String ListandCount(Model model) { 
@@ -152,7 +95,6 @@ public class BulletinController {
 
 		UserVo bulletinUser = (UserVo) session.getAttribute("successUser");
 		bulletinVo.setUser_no(bulletinUser.getNo());
->>>>>>> branch 'master' of https://github.com/Anthony-Yoo/mysite.git
 //			System.out.println(bulletinUser.getNo());
 //			System.out.println(bulletinVo);
 		bulletinService.write(bulletinVo);
