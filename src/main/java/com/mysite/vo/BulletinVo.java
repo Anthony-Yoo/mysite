@@ -11,10 +11,14 @@ public class BulletinVo {
 	private int user_no;
 	private String name;
 	private List<BulletinVo> bulletinList;
-	
+	private int pageNum;
+	private int maxCulumn;
+		
+	public BulletinVo() {
+	}
 	
 	public BulletinVo(int no, String title, String content, int hit, String reg_date, int user_no, String name,
-			List<BulletinVo> bulletinList) {
+			List<BulletinVo> bulletinList, int pageNum, int maxCulumn) {
 		this.no = no;
 		this.title = title;
 		this.content = content;
@@ -23,9 +27,10 @@ public class BulletinVo {
 		this.user_no = user_no;
 		this.name = name;
 		this.bulletinList = bulletinList;
+		this.pageNum = pageNum;
+		this.maxCulumn = maxCulumn;
 	}
-	public BulletinVo() {
-	}
+
 	public int getNo() {
 		return no;
 	}
@@ -74,10 +79,28 @@ public class BulletinVo {
 	public void setBulletinList(List<BulletinVo> bulletinList) {
 		this.bulletinList = bulletinList;
 	}
+
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public int getMaxCulumn() {
+		return maxCulumn;
+	}
+
+	public void setMaxCulumn(int maxCulumn) {
+		this.maxCulumn = maxCulumn;
+	}
+
 	@Override
 	public String toString() {
 		return "BulletinVo [no=" + no + ", title=" + title + ", content=" + content + ", hit=" + hit + ", reg_date="
-				+ reg_date + ", user_no=" + user_no + ", name=" + name + ", bulletinList=" + bulletinList + "]";
+				+ reg_date + ", user_no=" + user_no + ", name=" + name + ", bulletinList=" + bulletinList + ", pageNum="
+				+ pageNum + ", maxCulumn=" + maxCulumn + "]";
 	}
 	
 	

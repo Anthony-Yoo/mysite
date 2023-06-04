@@ -18,12 +18,18 @@ public class BulletinDao {
 		
 		return sqlsession.insert("bulletin.insert", bulletinVo);			
 	}
-	public List<BulletinVo> selectList() {
+	public List<BulletinVo> List() {
 		System.out.println("BulletinDao.selectList()");
 		
-		List<BulletinVo> bulletinlist = sqlsession.selectList("bulletin.selectList");	
+		List<BulletinVo> bulletinlist = sqlsession.selectList("bulletin.List");	
 		return bulletinlist;
 	}
+	public List<BulletinVo> ListWithPaging(BulletinVo bulletinVo) {
+		System.out.println("BulletinDao.selectList()");
+		
+		List<BulletinVo> bulletinlist = sqlsession.selectList("bulletin.pagingList",bulletinVo);	
+		return bulletinlist;
+	}	
 	public int updateCount(int no) {
 		System.out.println("BulletinDao.updateCount()");		
 		

@@ -7,6 +7,7 @@ public class BoardVo {
 	private String content;
 	private String reg_date;
 	
+	
 	public BoardVo() {
 	}
 
@@ -16,8 +17,9 @@ public class BoardVo {
 		this.password = password;
 		this.content = content;
 		this.reg_date = reg_date;
-	}
+	}	
 
+	
 	public int getNo() {
 		return no;
 	}
@@ -62,7 +64,8 @@ public class BoardVo {
 	public String toString() {
 		return "BoardVo [no=" + no + ", name=" + name + ", password=" + password + ", content=" + content
 				+ ", reg_date=" + reg_date + "]";
-	}
+	}	
+	
 	
 
 }

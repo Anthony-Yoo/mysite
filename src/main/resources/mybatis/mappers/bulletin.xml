@@ -27,7 +27,7 @@
 		]]>	
 	</insert>
 	<!-- 게시글리스트 조회 -->
-	<select id="selectList" resultType="com.mysite.vo.BulletinVo">
+	<select id="List" resultType="com.mysite.vo.BulletinVo">
 		<![CDATA[
 			select  bulletin.no,
         			bulletin.title,
@@ -40,6 +40,21 @@
 			Order by bulletin.no DESC
 		]]>	
 	</select>	
+	<!-- 페이징게시글리스트 조회 -->
+	<select id="pagingList" parameterType="com.mysite.vo.BulletinVo" resultType="com.mysite.vo.BulletinVo">
+		<![CDATA[
+						select  bulletin.no,
+        			bulletin.title,
+        			users.name,
+        			bulletin.hit,
+        			bulletin.reg_date
+			from bulletin
+			join users 
+			on users.no = bulletin.user_no
+			Order by bulletin.no DESC
+            OFFSET ((#{pageNum}-1)*${maxCulumn}) ROWS FETCH FIRST ${maxCulumn} ROWS ONLY;
+		]]>	
+	</select>
 	<!-- 조회수 증가 -->
 	<update id="updateCount" parameterType="int">
 		<![CDATA[

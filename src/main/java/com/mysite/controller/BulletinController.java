@@ -24,17 +24,21 @@ public class BulletinController {
 		private BulletinService bulletinService;
 		
 		@RequestMapping(value = "/bulletin/list",method = {RequestMethod.GET,RequestMethod.POST})
-		public String ListandCount(Model model) {
+		public String ListandCount(@ModelAttribute BulletinVo bulletinVo, Model model) {
 			System.out.println("BulletinController.ListandCouint");			
 			
+			bulletinVo.getMaxCulumn();
 			
-			List<BulletinVo> boardList = bulletinService.list();
+			
+//			List<BulletinVo> boardList = bulletinService.list();
+			List<BulletinVo> boardList = bulletinService.list(bulletinVo);
 			System.out.println(boardList);		
 			model.addAttribute("boardList",boardList);
 			
 			
 			return "/WEB-INF/views/bulletin/list.jsp";
 		}
+		
 		@RequestMapping("/bulletin/search")
 		public String search(@RequestParam String keyword,Model model) {
 			System.out.println("BulletinController.search()");

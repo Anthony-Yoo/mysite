@@ -43,19 +43,19 @@
 
 			<div id="board">
 				<div id="list">
-					<form action="${pageContext.request.contextPath}/bulletin/search" method="get">
+					<form action="${pageContext.request.contextPath}/rBoard/search" method="get">
 						<div class="form-group text-right">
 							<input type="text" name="keyword" placeholder="제목/글쓴이 검색">
 							<button type="submit" id=btn_search>검색</button>
 						</div>
 					</form>
 					<!-- 리스트반복 시작-->								
-					<c:forEach items="${requestScope.boardList}" var="bulletinVo" begin="0" end="10">			
+					<c:forEach items="${requestScope.boardList}" var="rBoardVo" begin="0" end="10">			
 					<table>					
 						<thead>
 							<tr>
 								<th>번호</th>
-								<th>제목</th>
+								<th>제목</th>								
 								<th>글쓴이</th>
 								<th>조회수</th>
 								<th>작성일</th>
@@ -64,16 +64,17 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>${bulletinVo.no}</td>
-								<td><a href="${pageContext.request.contextPath}/bulletin/viewForm?no=${bulletinVo.no}">${bulletinVo.title}</a></td>
-								<td>${bulletinVo.name}</td>
-								<td>${bulletinVo.hit}</td>
-								<td>${bulletinVo.reg_date}</td>
+								<td>${rBoardVo.no}</td>
+								<td><a href="${pageContext.request.contextPath}/rBoard/viewForm?no=${rBoardVo.no}"><c:forEach begin="0" end="${rBoardVo.depth}" var="rBoardVo">RE:</c:forEach> ${rBoardVo.title}</a></td>
+								<td>${rBoardVo.name}</td>
+								<td>${rBoardVo.hit}</td>
+								<td>${rBoardVo.reg_date}</td>
 						<c:choose>
-							<c:when test="${sessionScope.successUser.name eq bulletinVo.name}">		
-								<td><a href="${pageContext.request.contextPath}/bulletin/delete?no=${bulletinVo.no}">[삭제]</a></td>
+							<c:when test="${sessionScope.successUser.name eq rBoardVo.name}">		
+								<td><a href="${pageContext.request.contextPath}/rBoard/delete?no=${rBoardVo.no}">[삭제]</a></td>
 							</c:when>
-						</c:choose>			
+						</c:choose>						
+								<td><a href="${pageContext.request.contextPath}/rBoard/writeForm?no=${rBoardVo.no}">[답글]</a></td>			
 							</tr>							
 						</tbody>					 
 					</table>
@@ -104,7 +105,7 @@
 					</div>
 					<c:choose>
 							<c:when test="${sessionScope.successUser!=null}">
-								<a id="btn_write" href="${pageContext.request.contextPath}/bulletin/writeForm">글쓰기</a>
+								<a id="btn_write" href="${pageContext.request.contextPath}/rBoard/writeForm">글쓰기</a>
 							</c:when>
 					</c:choose>					
 				</div>

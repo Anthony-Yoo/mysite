@@ -19,10 +19,11 @@ public class BulletinService {
 						
 		return bulletinDao.insertBulletin(bulletinVo);
 	}
-	public List<BulletinVo> list() {
+	public List<BulletinVo> list(BulletinVo bulletinVo) {
 		System.out.println("BulletinService.list()");
 		
-		List<BulletinVo> bulletinList = bulletinDao.selectList();
+		List<BulletinVo> bulletinList = bulletinDao.List();
+//		List<BulletinVo> bulletinList = bulletinDao.ListWithPaging(bulletinVo);
 		
 		return bulletinList; 		
 	}
