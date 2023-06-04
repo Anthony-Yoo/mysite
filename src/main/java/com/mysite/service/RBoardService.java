@@ -27,30 +27,23 @@ public class RBoardService {
 		
 		return rBoardList; 		
 	}
-	public rBoardVo view(int no) {
-		System.out.println("rBoardService.view()");
-		
-		return rBoardDao.selectOne(no);
-	}
-	public int viewCount(int no) {
-		System.out.println("rBoardService.viewForm()");	
-		
-		return rBoardDao.updateCount(no);		
-	}
-	public int delete(int no) {
-		System.out.println("rBoardService.delete()");
-				
-		return rBoardDao.delete(no);
-	}
-	public int modify(rBoardVo rBoardVo) {
-		System.out.println("rBoardService.modify()");
-		
-		return rBoardDao.updateOne(rBoardVo);	
-	}
-	public List<rBoardVo>  search(String keyword) {
-		System.out.println("rBoardService.search");
-		
-		return rBoardDao.selectKeyword(keyword);
-		
-	}
+	/*
+	 * public rBoardVo view(int no) { System.out.println("rBoardService.view()");
+	 * 
+	 * return rBoardDao.selectOne(no); } public int viewCount(int no) {
+	 * System.out.println("rBoardService.viewForm()");
+	 * 
+	 * return rBoardDao.updateCount(no); } public int delete(int no) {
+	 * System.out.println("rBoardService.delete()");
+	 * 
+	 * return rBoardDao.delete(no); } public int modify(rBoardVo rBoardVo) {
+	 * System.out.println("rBoardService.modify()");
+	 * 
+	 * return rBoardDao.updateOne(rBoardVo); } public List<rBoardVo> search(String
+	 * keyword) { System.out.println("rBoardService.search");
+	 * 
+	 * return rBoardDao.selectKeyword(keyword);
+	 * 
+	 * }
+	 */
 }
