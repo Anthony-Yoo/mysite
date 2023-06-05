@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mysite.dao.BoardDao;
 import com.mysite.vo.BoardVo;
+import com.mysite.vo.JsonResult;
 
 @Service
 public class BoardService {
@@ -22,7 +23,7 @@ public class BoardService {
 	
 	public int writeGuest(BoardVo boardVo) {
 		System.out.println("Service.guestForm()");		
-		
+				
 		return boardDao.insertBoard(boardVo);
 	}
 	public int delete(BoardVo boardVo) {
@@ -30,7 +31,14 @@ public class BoardService {
 		
 		return boardDao.deleteGuest(boardVo);
 	}
-	
+	public BoardVo addGuest(BoardVo boardVo) {
+		System.out.println("Service.guestForm()");		
+		boardDao.insertSelectKey(boardVo);
+		int no = boardVo.getNo();
+		BoardVo boardGuest = boardDao.selectOne(no);
+				
+		return boardGuest;
+	}
 	
 
 }

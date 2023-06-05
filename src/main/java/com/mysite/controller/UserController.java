@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysite.service.UserService;
+import com.mysite.vo.JsonResult;
 import com.mysite.vo.UserVo;
 
 @Controller
@@ -103,12 +104,25 @@ public class UserController {
 	//회원가입 아이디체크
 	@ResponseBody
 	@RequestMapping("/user/idcheck")
-	public UserVo idcheck(@RequestParam("id") String id) {
+	public JsonResult idcheck(@RequestParam("id") String id) {
 		System.out.println("UserController.idcheck");
 		System.out.println(id);
 		
-		UserVo uservo = userService.idcheck(id);
+		boolean result = userService.idcheck(id);
 		
-		return uservo;
+		JsonResult jsonResult = new JsonResult();
+		
+		jsonResult.success(result);		
+		
+//		jsonResult.setResult("success");
+//		jsonResult.setData(jsonResult);
+//		jsonResult.setResult("fail");
+//		jsonResult.setFailMsg("통신오류");
+		
+		
+		System.out.println(jsonResult);
+		
+		
+		return jsonResult;
 	}
 }

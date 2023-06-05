@@ -43,11 +43,34 @@
      		WHERE no = #{no}
      		AND password = #{password}		
      		
-		]]>
-	
-	
-	
-	
+		]]>	
 	</delete>
-
+	<!-- 게시글작성(셀렉트키포함) -->
+	<insert id="insertSelectKey" parameterType="com.mysite.vo.BoardVo">	
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select SEQ_GUESTBOOK_NO.nextval from dual		
+		</selectKey>
+		<![CDATA[
+			insert into guestbook(
+									no,
+									name,
+									password,
+									content,
+									reg_date
+							    )			
+			values ( #{no},#{name},#{password},#{content},sysdate )	
+		]]>
+	</insert>
+	<!-- 선택 방명록 게시글 호출 -->
+	<select id="selectOne" parameterType="int" resultType="com.mysite.vo.BoardVo">
+		<![CDATA[
+			select  no,
+					name,
+					password,
+					content,
+					reg_date
+			from	guestbook
+			where no = #{no}		
+		]]>	
+	</select>
 </mapper>

@@ -29,8 +29,19 @@ public class BoardDao {
 	public int deleteGuest(BoardVo boardVo) {
 		System.out.println("Dao.deleteGuest()");
 		
-		return sqlSession.delete("board.delete", boardVo);
-		
+		return sqlSession.delete("board.delete", boardVo);		
 	}
+	public int insertSelectKey(BoardVo boardVo) {
+		System.out.println("Dao.insertSelectKey()");
+		System.out.println(boardVo);		
+		
+		return sqlSession.insert("board.insertSelectKey", boardVo);
+	}
+	public BoardVo selectOne(int no) {
+		System.out.println("Dao.selectOne()");
+		
+		return sqlSession.selectOne("board.selectOne", no);
+	}
+	
 	
 }

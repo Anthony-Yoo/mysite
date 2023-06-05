@@ -29,8 +29,7 @@
 		</div>
 		<!-- //aside -->
 
-		<div id="content">
-			
+		<div id="content">			
 			<div id="content-head">
             	<h3>회원가입</h3>
             	<div id="location">
@@ -107,7 +106,6 @@
 
 	</div>
 	<!-- //wrap -->
-
 </body>
 <script type="text/javascript">
 $("#idCheck").on("click",function(){
@@ -120,18 +118,26 @@ $("#idCheck").on("click",function(){
 			url : "${pageContext.request.contextPath}/user/idcheck",		
 			type : "post",
 			/* contentType : "application/json", */
-			data : {id: id},
+			data : {id : id},
 	
 			dataType : "json",
-			success : function(result){
-				console.log(result);
+			success : function(jsonResult){
+				console.log(jsonResult);
 				/*성공시 처리해야될 코드 작성*/
-				if(result==null) {		
-					//사용가능
-					$("#idCheckMsg").text(id + "는 사용가능이다 닝겐!")
+				
+				if(jsonResult.result=="success") {//처리성공		
+					//사용가능여부 표현
+					if(jsonResult.data == true) {						
+						$("#idCheckMsg").html(id+"는 사용가능 합니다.");
+						
+					}else {
+						$("#idCheckMsg").html(id+"는 사용불가능 합니다.");
+					}
+				
 				}else {
-					//사용불가
-					$("#idCheckMsg").text(id + "는 사용불가능이다 닝겐!")
+					var msg = jsonResult.failMsg;
+					alter(msg);
+					
 				}
 			},
 			error : function(XHR, status, error) {
@@ -145,11 +151,6 @@ $("#idCheck").on("click",function(){
 			pass :"1234",
 			gender : "male"			
 	} */
-	
-	
-	
-	
 });
 </script>
-
 </html>

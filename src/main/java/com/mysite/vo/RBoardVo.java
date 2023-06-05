@@ -1,7 +1,5 @@
 package com.mysite.vo;
 
-import java.util.List;
-
 public class RBoardVo {
 	private int no;
 	private int user_no;
@@ -27,6 +25,8 @@ public class RBoardVo {
 	}
 
 	public RBoardVo() {
+		this.group_no = 1;
+		this.depth = 0;
 	}
 
 	public int getNo() {

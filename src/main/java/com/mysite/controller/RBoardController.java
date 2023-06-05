@@ -1,6 +1,8 @@
 package com.mysite.controller;
 
 import java.util.List;
+import java.lang.reflect.Method;
+import javax.servlet.http.HttpSession;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,8 +21,8 @@ import com.mysite.vo.RBoardVo;
 @Controller
 public class RBoardController {
 		
-		@Autowired
-		private RBoardService rBoardService;
+//		@Autowired
+//		private RBoardService rBoardService;
 		
 		
 		@RequestMapping(value = "/rBoard/writeForm",method = {RequestMethod.GET,RequestMethod.POST})

@@ -3,15 +3,16 @@ package com.mysite.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import com.mysite.dao.BulletinDao;
 import com.mysite.vo.BulletinVo;
 
-@Service
+
 public class RBoardService {
 	
-	@Autowired
+
 	private RBoardDao rBoardDao;
 	
 	public int write(rBoardVo rBoardVo) {

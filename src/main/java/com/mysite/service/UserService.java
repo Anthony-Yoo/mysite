@@ -36,9 +36,19 @@ public class UserService {
 		
 		return userDao.updateUser(userVo);
 	}
-	public UserVo idcheck(String id) {
-		System.out.println("UserService.idcheck()");	
+	public boolean idcheck(String id) {
+		System.out.println("UserService.idcheck()");
+		
+		UserVo usrVo = userDao.selectId(id);
+		
+		boolean result;
+		
+		if(usrVo == null) { //사용가능
+			result = true;
+		} else { 			//사용불가
+			result = false;
+		}
 			
-		return userDao.selectId(id);
+		return result;
 	}
 }

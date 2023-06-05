@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mysite.service.BoardService;
 import com.mysite.vo.BoardVo;
+import com.mysite.vo.JsonResult;
 
 @Controller
 public class BoardController {
@@ -29,6 +32,7 @@ public class BoardController {
 			 
 			return "/WEB-INF/views/guestbook/addList.jsp";
 		}
+		
 		@RequestMapping("/board/writeGuest")
 		public String writeGuest(@ModelAttribute BoardVo boardVo,HttpSession session) {
 			System.out.println("BoardController.writeGuest()");
@@ -54,6 +58,5 @@ public class BoardController {
 			
 			return "redirect:/board/addList";
 			
-		}
-
+		}		
 }
