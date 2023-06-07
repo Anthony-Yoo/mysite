@@ -18,19 +18,18 @@ import com.mysite.service.BulletinService;
 import com.mysite.service.RBoardService;
 import com.mysite.vo.RBoardVo;
 
-@Controller
+
 public class RBoardController {
 		
-//		@Autowired
-//		private RBoardService rBoardService;
+		
+		private RBoardService rBoardService;
 		
 		
 		@RequestMapping(value = "/rBoard/writeForm",method = {RequestMethod.GET,RequestMethod.POST})
 		public String writeForm(@ModelAttribute RBoardVo rBoardVo,Model model) {
 			System.out.println("rBoardController.writeForm()");
-			System.out.println(rBoardVo);
-			
-//			rBoardService.writeForm(rBoardVo);
+			System.out.println(rBoardVo);			
+					
 			
 			return "/WEB-INF/views/rBoard/writeForm.jsp";
 			

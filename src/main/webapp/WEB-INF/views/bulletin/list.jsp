@@ -65,7 +65,7 @@
 						<tbody>
 							<tr>
 								<td>${bulletinVo.no}</td>
-								<td><a href="${pageContext.request.contextPath}/bulletin/viewForm?no=${bulletinVo.no}">${bulletinVo.title}</a></td>
+								<td><a href="${pageContext.request.contextPath}/bulletin/viewForm?no=${bulletinVo.no}"><c:forEach begin="0" end="${bulletinVo.depth}">RE:</c:forEach> ${bulletinVo.title}</a></td>
 								<td>${bulletinVo.name}</td>
 								<td>${bulletinVo.hit}</td>
 								<td>${bulletinVo.reg_date}</td>
@@ -73,7 +73,8 @@
 							<c:when test="${sessionScope.successUser.name eq bulletinVo.name}">		
 								<td><a href="${pageContext.request.contextPath}/bulletin/delete?no=${bulletinVo.no}">[삭제]</a></td>
 							</c:when>
-						</c:choose>			
+						</c:choose>
+								<td><a href="${pageContext.request.contextPath}/rBoard/writeForm?no=${bulletinVo.no}">[답글]</a></td>							
 							</tr>							
 						</tbody>	
 					    </c:forEach>					 

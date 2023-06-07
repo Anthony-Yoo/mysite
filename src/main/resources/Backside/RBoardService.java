@@ -8,26 +8,36 @@ import org.springframework.stereotype.Service;
 
 import com.mysite.dao.BulletinDao;
 import com.mysite.vo.BulletinVo;
+import com.mysite.vo.RBoardVo;
 
 
 public class RBoardService {
-	
 
+	
 	private RBoardDao rBoardDao;
 	
-	public int write(rBoardVo rBoardVo) {
-		System.out.println("rBoardService.write()");
-						
-		return rBoardDao.insertrBoard(rBoardVo);
-	}
-	public List<rBoardVo> list(rBoardVo rBoardVo) {
-		System.out.println("rBoardService.list()");
+	public RBoardVo writeForm(RBoardVo rboardVo) {
+		System.out.println("RBoardService.writeForm()");
 		
-		List<rBoardVo> rBoardList = rBoardDao.List();
+		return null;
+	}
+	
+	
+	
+	
+//	public int write(rBoardVo rBoardVo) {
+//		System.out.println("rBoardService.write()");
+//						
+//		return rBoardDao.insertrBoard(rBoardVo);
+//	}
+//	public List<rBoardVo> list(rBoardVo rBoardVo) {
+//		System.out.println("rBoardService.list()");
+//		
+//		List<rBoardVo> rBoardList = rBoardDao.List();
 //		List<rBoardVo> rBoardList = rBoardDao.ListWithPaging(rBoardVo);
-		
-		return rBoardList; 		
-	}
+//		
+//		return rBoardList; 		
+//	}
 	/*
 	 * public rBoardVo view(int no) { System.out.println("rBoardService.view()");
 	 * 

@@ -30,7 +30,7 @@ public class BoardController {
 		
 			model.addAttribute("guestList", guestList);
 			 
-			return "/WEB-INF/views/guestbook/addList.jsp";
+			return "/WEB-INF/views/guestbook/ajaxList.jsp";
 		}
 		
 		@RequestMapping("/board/writeGuest")

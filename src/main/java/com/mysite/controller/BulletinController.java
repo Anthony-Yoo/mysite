@@ -23,42 +23,56 @@ import com.mysite.vo.UserVo;
 @Controller
 public class BulletinController {
 		
-		@Autowired
-		private BulletinService bulletinService;		
+	@Autowired
+	private BulletinService bulletinService;		
 	
 	
 	 @RequestMapping(value = "/bulletin/list",method = {RequestMethod.GET,RequestMethod.POST}) 
-	 public String ListandCount(Model model) { 
-		 System.out.println("BulletinController.ListandCouint");
+	 public String List(Model model) { 
+		 System.out.println("BulletinController.List");
 	  
 	  
 		 List<BulletinVo> boardList = bulletinService.list();
-		 System.out.println(boardList); model.addAttribute("boardList",boardList);
+		 System.out.println(boardList); 
+		 model.addAttribute("boardList",boardList);
 	  
-	  return "/WEB-INF/views/bulletin/list.jsp"; }
+	  return "/WEB-INF/views/bulletin/list.jsp"; 
+	  }
 	 
-	@RequestMapping(value = "/bulletin/list2", method = { RequestMethod.POST, RequestMethod.GET })
-	public String ListAndCountPaging(@ModelAttribute BulletinVo bullVo, Model model) {
-		System.out.println("BulletinController.ListAndCountNumbering()");
-
-		int pageNum = bullVo.getPageNum();
-		System.out.println(pageNum);
-
-		PageVo pageVo = new PageVo();
-		pageVo.setCri(bullVo);
-		System.out.println(pageVo);
+	 @RequestMapping(value="/bulletin/list2",method = {RequestMethod.GET,RequestMethod.POST})
+	 public String List2(Model model) { 
+		 System.out.println("BulletinController.List2");
+		  
+		  
+		 List<BulletinVo> boardList = bulletinService.list();
+		 System.out.println(boardList); 
+		 model.addAttribute("boardList",boardList);
+	  
+	  return "/WEB-INF/views/bulletin/list.jsp"; 
+	  }
+	 
+//	@RequestMapping(value = "/bulletin/list3", method = { RequestMethod.POST, RequestMethod.GET })
+//	public String ListAndCountPaging(@ModelAttribute BulletinVo bullVo, Model model) {
+//		System.out.println("BulletinController.ListAndCountNumbering()");
+//
+//		int pageNum = bullVo.getPageNum();
+//		System.out.println(pageNum);
+//
+//		PageVo pageVo = new PageVo();
+//		pageVo.setCri(bullVo);
+//		System.out.println(pageVo);
 		// 리스트 조회시 게시글 총 숫자 서비스 호출
 //		bulletinService.totalCount();
 //		pageVo.setTotalCount(tCount);
 		// == pageVo 초기화 및 변수초기화 완료 ==
 //		System.out.println(pageVo);
-		model.addAttribute("paging", pageVo);
-
-		List<BulletinVo> boardList = bulletinService.list();
-		model.addAttribute("boardList", boardList);
-
-		return "";
-	}
+//		model.addAttribute("paging", pageVo);
+//
+//		List<BulletinVo> boardList = bulletinService.list();
+//		model.addAttribute("boardList", boardList);
+//
+//		return "";
+//	}
 
 	@RequestMapping("/bulletin/search")
 	public String search(@RequestParam(value = "keyword",required = false,defaultValue = "") String keyword, Model model) {

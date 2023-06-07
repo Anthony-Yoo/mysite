@@ -71,26 +71,7 @@
 					</table>
 					<!-- //guestWrite -->
 				<div id="guestbookListArea">
-					<c:forEach items="${guestList}" var="listVo">
-					<table id="t-${listVo.no}" class="guestRead">
-						<colgroup>
-							<col style="width: 10%;">
-							<col style="width: 40%;">
-							<col style="width: 40%;">
-							<col style="width: 10%;">
-						</colgroup>
-						<tr>
-							<td>${listVo.no}</td>
-							<td>${listVo.name}</td>
-							<td>${listVo.reg_date}</td>
-							<td>
-								<button type="button" class="btn btn-default btn-sm deletebtn" data-delno="${listVo.no}" >삭제</button></td>
-						</tr>
-						<tr>
-							<td colspan=4 class="text-left">${listVo.content}</td>
-						</tr>
-					</table>
-					</c:forEach>
+					방명록 리스트 출력 영역
 				</div>
 				<!-- //guestRead -->				
 			</div>
@@ -98,9 +79,8 @@
 		</div>
 		<!-- //content  -->
 		<div class="clear"></div>
-		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->
-
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 	</div>
 	<!-- //wrap -->
 
@@ -128,74 +108,39 @@
 
 </body>
 <script type="text/javascript">
-//모달창 AjAX 연동
-$("#modalDeletebtn").on("click",function(){
-	console.log("모달창 삭제버튼 클릭");
+//DOM생성 후 그리기 전
+$(document).ready(function(){
 	
-	//AJAX 데이터전달
-	//변수 선언
-	var passwd = $("#modalPassWord").val();
-	var no = $("#modalNo").val();
-	
-	console.log(passwd,no);
-	
-	var guestVo = {
-			password : passwd,
-			no : no
-	};
-	console.log(guestVo);
-	
+		fetchList();
+		
+});
+
+function fetchList(){
 	$.ajax({			
-		url : "${pageContext.request.contextPath}/api/guestbook/remove",		
+		url : "${pageContext.request.contextPath}/api/guestbook/list",		
 		type : "post",
-		/* contentType : "application/json"*/
-		data : guestVo,
+		/* contentType : "application/json"
+		data : guestVo,*/
 
 		dataType : "json",
 		success : function(jsonResult){
-			var id = "t-"+guestVo.no;
-			
 			console.log(jsonResult);
 			/*성공시 처리해야될 코드 작성*/
 			
-			if(jsonResult.data>0) {//처리성공					
-				$("#"+id).remove();
-				$('#myModal').modal('hide');
-					
-			}else {//오류처리
-				alert("비밀번호가 틀렸습니다.")
+			var guestList = jsonResult.data;
+			
+			for(var i =1; i<guestList.length;i++) {
+				render(guestList[i],"down");
 			}
+	
 		},
 		error : function(XHR, status, error) {
 			console.error(status + " : " + error);
-		}			
-	});
-	console.log("test입니다." + guestVo.no);	
-});
-
-
-//삭제 모달창 호출버튼 클릭
-$("#guestbookListArea").on("click",".deletebtn",function(){
-	console.log("삭제버튼 클릭");
-	
-	//초기화
-	$("#modalPassWord").val("");
-	$("#modalNo").val("");
-	
-	//게스트북 No. 호출
-	//data("no")
-	var $thisDelNo = $(this).data("delno");
-	console.log($thisDelNo);
-	
-	$("#modalNo").val($thisDelNo);		
-	
-	//모달창 호출
-	$('#myModal').modal('show'); 
-	
-});
-
-
-//글작성 이벤트 설정(ajax) 
+		}	
+		
+		});
+}
+//방명록 저장 버튼 클릭할때
 $("#btnSubmit").on("click",function(){
 	console.log("등록버튼 작동");
 	//변수 설정
@@ -204,12 +149,14 @@ $("#btnSubmit").on("click",function(){
 		password : $("[name='password']").val(),
 		content : $("[name='content']").val()	
 	};
-	console.log(boardVo);
+	var str =JSON.stringify(boardVo); 
+	console.log(str);
+	
 	$.ajax({			
-		url : "${pageContext.request.contextPath}/api/guestbook/add",		
+		url : "${pageContext.request.contextPath}/api/guestbook/add2",		
 		type : "post",
-		/*contentType : "application/json"*/
-		data : boardVo,
+		contentType : "application/json",
+		data : str,
 
 		dataType : "json",
 		success : function(jsonResult){
@@ -217,7 +164,7 @@ $("#btnSubmit").on("click",function(){
 			/*성공시 처리해야될 코드 작성*/
 			
 			if(jsonResult.result=="success") {//처리성공					
-					render(jsonResult.data);
+					render(jsonResult.data,"up");
 					console.log("성공");
 					
 					$("[name='name']").val("");
@@ -235,31 +182,42 @@ $("#btnSubmit").on("click",function(){
 		}			
 	});			
 });	
-	//방명록 리스트 랜더링
-	function render(guestBookVo) {
-		var str = "";
-		str += '<table id="t-' + guestBookVo.no +  '" + class="currentGuestRead">';
-		str += '	<colgroup>';
-		str += '		<col style="width: 10%;">';
-		str += '		<col style="width: 40%;">';
-		str += '		<col style="width: 40%;">';
-		str += '		<col style="width: 10%;">';
-		str += '	</colgroup>';
-		
-		str += '	<tr>';
-		str += '		<td>'+ guestBookVo.no + '</td>';
-		str += '		<td>'+ guestBookVo.name + '</td>';
-		str += '		<td>'+ guestBookVo.reg_date + '</td>';
-		str += '		<td><button type="button" class="btn btn-default btn-sm deletebtn" data-delno="'+guestBookVo.no+'">삭제</button></td>';
-		str += '	</tr>';
-		
-		str += '	<tr>';
-		str += '	<td colspan=4 class="text-left">'+ guestBookVo.content + '</td>';
-		str += '	</tr>';
-		str += '</table>';
-		str += '<br>';
-		
+
+
+//방명록 리스트 랜더링
+function render(guestBookVo,dir) {
+	var str = "";
+	str += '<table id="t-' + guestBookVo.no +  '" + class="currentGuestRead">';
+	str += '	<colgroup>';
+	str += '		<col style="width: 10%;">';
+	str += '		<col style="width: 40%;">';
+	str += '		<col style="width: 40%;">';
+	str += '		<col style="width: 10%;">';
+	str += '	</colgroup>';
+	
+	str += '	<tr>';
+	str += '		<td>'+ guestBookVo.no + '</td>';
+	str += '		<td>'+ guestBookVo.name + '</td>';
+	str += '		<td>'+ guestBookVo.reg_date + '</td>';
+	str += '		<td><button type="button" class="btn btn-default btn-sm deletebtn" data-delno="'+guestBookVo.no+'">삭제</button></td>';
+	str += '	</tr>';
+	
+	str += '	<tr>';
+	str += '	<td colspan=4 class="text-left">'+ guestBookVo.content + '</td>';
+	str += '	</tr>';
+	str += '</table>';
+	str += '<br>';
+	
+	if(dir =="up"){		
 		$("#guestbookListArea").prepend(str);	
+	}else if(dir =="down") {
+		$("#guestbookListArea").append(str);
+		
+	}else { 
+		console.log("방향오류")
 	}
+}
+
+
 </script>
 </html>
