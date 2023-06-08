@@ -38,22 +38,31 @@ public class GalleryController {
 		
 		return "/WEB-INF/views/gallery/list.jsp";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/view",method = {RequestMethod.GET,RequestMethod.POST})
-	public JsonResult view(@RequestParam("no") int no,  Model model) {
+	public JsonResult view(@RequestParam("no") int no,  Model model,HttpSession session) {
 		System.out.println("GalleryController.view()");
 		
 		JsonResult jsonResult = new JsonResult();
-		jsonResult.success(galleryServise.view(no));		
-		System.out.println(galleryServise.view(no));
+		GalleryVo galleryVo = new GalleryVo();
+		UserVo bulletinUser = (UserVo) session.getAttribute("successUser");
+		galleryVo = galleryServise.view(no);
+		try {			
+			galleryVo.setSessionName(bulletinUser.getName());	
+			jsonResult.success(galleryVo);
+		} catch (Exception e) {
+			e.printStackTrace();			
+		}
+		
+		jsonResult.success(galleryVo);		
+		System.out.println(galleryVo);
 		System.out.println(jsonResult);
 		
 		return jsonResult;
 		
 	}
-	
-	
-	
+		
 	@RequestMapping(value="/upload",method = {RequestMethod.GET,RequestMethod.POST})
 	public String upload(@RequestParam("file") MultipartFile file,@ModelAttribute GalleryVo galleryVo,HttpSession session) {
 		System.out.println("FileUpLoadController.upload()");	
@@ -72,5 +81,12 @@ public class GalleryController {
 		
 		return "redirect:/gallery/list";
 	}
-	
+	@RequestMapping(value="/delete",method = {RequestMethod.GET,RequestMethod.POST})
+	public String delete(@RequestParam int no) {
+		System.out.println("FileUpLoadController.delete()");
+
+		galleryServise.delete(no);
+
+		return "redirect:/gallery/list";
+	}
 }

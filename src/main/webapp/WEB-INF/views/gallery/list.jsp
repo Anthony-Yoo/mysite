@@ -56,7 +56,7 @@
 					<ul id="viewArea">
 
 						<!-- 이미지반복영역 -->
-						<c:forEach begin="1" end="15" items="${requestScope.galleryList}" var="galleryVo">
+						<c:forEach begin="0" end="15" items="${requestScope.galleryList}" var="galleryVo">
 						<li>
 							<div class="view" data-no="${galleryVo.no}">
 								<img class="imgItem" src="${pageContext.request.contextPath}/upload/${galleryVo.saveName}">
@@ -144,12 +144,12 @@
 					</div>
 
 				</div>
-				<form method="" action="">
+				<form method="get" action="${pageContext.request.contextPath}/gallery/delete">
 					<div class="modal-footer">
+						<input type="hidden" class="btnDelNum" name="no" value=""/>	
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
+						<button type="submit" class="btn btn-danger" id="btnDel">삭제</button>								
 					</div>
-
 
 				</form>
 
@@ -176,6 +176,7 @@ $(".view").on("click",function(){
 	var $thisNo = $(this).data("no");
 	console.log($thisNo);
 	//galleryvo객체 가져오기
+	var str = "";	
 	$.ajax({			
 		url : "${pageContext.request.contextPath}/gallery/view",		
 		type : "post",
@@ -190,6 +191,12 @@ $(".view").on("click",function(){
 												
 				$('#viewModelImg').attr("src",'${pageContext.request.contextPath}/upload/' + jsonResult.data.saveName );				
 				$('#viewModelContent').html(jsonResult.data.content);
+				if(jsonResult.data.sessionName == jsonResult.data.userName){
+					$("#btnDel").show();				
+				}else {
+					console.log("세션정보 불일치");
+					$("#btnDel").hide();
+				}
 				$('#viewModal').modal('show');	
 			}else {//오류처리
 				alert("오류확인요망")
@@ -198,9 +205,9 @@ $(".view").on("click",function(){
 		error : function(XHR, status, error) {
 			console.error(status + " : " + error);
 		}			
-	});			
+	});	
+	$(".btnDelNum").val($thisNo);
 });	
-
 
 </script>
 

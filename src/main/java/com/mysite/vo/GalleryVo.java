@@ -10,9 +10,13 @@ public class GalleryVo {
 	private String saveName;
 	private long fileSize;
 	private String userName;
+	private String sessionName;
 	
+	public GalleryVo() {
+	}
+
 	public GalleryVo(int no, int user_no, String content, String filePath, String orgName, String saveName,
-			long fileSize, String userName) {
+			long fileSize, String userName, String sessionName) {
 		this.no = no;
 		this.user_no = user_no;
 		this.content = content;
@@ -21,10 +25,7 @@ public class GalleryVo {
 		this.saveName = saveName;
 		this.fileSize = fileSize;
 		this.userName = userName;
-	}
-
-	public GalleryVo() {
-		super();
+		this.sessionName = sessionName;
 	}
 
 	public int getNo() {
@@ -91,11 +92,19 @@ public class GalleryVo {
 		this.userName = userName;
 	}
 
+	public String getSessionName() {
+		return sessionName;
+	}
+
+	public void setSessionName(String sessionName) {
+		this.sessionName = sessionName;
+	}
+
 	@Override
 	public String toString() {
 		return "GalleryVo [no=" + no + ", user_no=" + user_no + ", content=" + content + ", filePath=" + filePath
 				+ ", orgName=" + orgName + ", saveName=" + saveName + ", fileSize=" + fileSize + ", userName="
-				+ userName + "]";
+				+ userName + ", sessionName=" + sessionName + "]";
 	}
 	
 	

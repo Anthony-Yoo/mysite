@@ -16,7 +16,7 @@ import com.mysite.vo.GalleryVo;
 
 @Service
 public class GalleryService {
-	String saveDir = "C:\\javaStudy\\upload";
+	String saveDir = "D:\\Dev\\upload";
 	GalleryVo galleryVo = new GalleryVo();
 	
 	@Autowired
@@ -28,7 +28,11 @@ public class GalleryService {
 		return galleryDao.selectOne(no);
 	}
 	
-	
+	public int delete(int no) {
+		System.out.println("GalleryService.delete()");
+				
+		return galleryDao.delete(no);
+	}
 	
 	public List<GalleryVo> list() {
 		System.out.println("GalleryService.list()");
