@@ -41,14 +41,14 @@ public class BulletinController {
 	 
 	 @RequestMapping(value="/bulletin/list2",method = {RequestMethod.GET,RequestMethod.POST})
 	 public String List2(Model model) { 
-		 System.out.println("BulletinController.List2");
+		 System.out.println("BulletinController.List2()");
 		  
 		  
 		 List<BulletinVo> boardList = bulletinService.list();
 		 System.out.println(boardList); 
 		 model.addAttribute("boardList",boardList);
 	  
-	  return "/WEB-INF/views/bulletin/list.jsp"; 
+	  return "/WEB-INF/views/bulletin/list2.jsp"; 
 	  }
 	 
 //	@RequestMapping(value = "/bulletin/list3", method = { RequestMethod.POST, RequestMethod.GET })

@@ -39,7 +39,7 @@
 		<![CDATA[
 			select  bulletin.no,
         			bulletin.title,
-        			users.name,
+        			users.name ,
         			bulletin.hit,
         			bulletin.reg_date
 			from bulletin

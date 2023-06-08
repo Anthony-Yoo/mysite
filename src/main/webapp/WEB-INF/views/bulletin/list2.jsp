@@ -57,7 +57,7 @@
 								<th>글쓴이</th>
 								<th>조회수</th>
 								<th>작성일</th>
-								<th>관리</th>
+								<th colspan="2">관리</th>
 							</tr>
 						</thead>
 						<!-- 리스트반복 시작-->
@@ -65,7 +65,10 @@
 						<tbody>
 							<tr>
 								<td>${bulletinVo.no}</td>
-								<td><a href="${pageContext.request.contextPath}/bulletin/viewForm?no=${bulletinVo.no}">${bulletinVo.title}</a></td>
+								<td class="text-left">
+									<%-- <c:choose>
+										<c:when test = "${bulletinVo.depth >1 }"> --%>
+								<a href="${pageContext.request.contextPath}/bulletin/viewForm?no=${bulletinVo.no}">${bulletinVo.title}</a></td>
 								<td>${bulletinVo.name}</td>
 								<td>${bulletinVo.hit}</td>
 								<td>${bulletinVo.reg_date}</td>
