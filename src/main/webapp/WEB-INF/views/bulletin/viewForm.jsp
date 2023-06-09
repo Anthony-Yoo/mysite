@@ -78,7 +78,7 @@
 								<a id="btn_modify" href="${pageContext.request.contextPath}/bulletin/modifyForm?no=${view.no}">수정</a>
 							</c:when>
 						</c:choose>						
-						<a id="btn_modify" href="${pageContext.request.contextPath}/bulletin/list">목록</a>							
+						<a id="btn_modify" href="${pageContext.request.contextPath}/bulletin/list3">목록</a>							
 					</form>
 	                <!-- //form -->
 				</div>

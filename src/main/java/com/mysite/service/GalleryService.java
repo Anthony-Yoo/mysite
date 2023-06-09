@@ -16,7 +16,7 @@ import com.mysite.vo.GalleryVo;
 
 @Service
 public class GalleryService {
-	String saveDir = "D:\\Dev\\upload";
+	String saveDir = "c:\\javaStudy\\upload";
 	GalleryVo galleryVo = new GalleryVo();
 	
 	@Autowired

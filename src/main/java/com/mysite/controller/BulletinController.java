@@ -2,6 +2,8 @@ package com.mysite.controller;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.annotation.JsonFormat.Value;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.mysite.service.BulletinService;
 import com.mysite.vo.BulletinVo;
 import com.mysite.vo.CriteriaVo;
@@ -26,6 +30,31 @@ public class BulletinController {
 	@Autowired
 	private BulletinService bulletinService;		
 	
+	//페이징 게시판 + Search 기술 포함*
+	@RequestMapping(value = "/bulletin/list4",method = {RequestMethod.GET,RequestMethod.POST})
+	public String List4(@RequestParam(value="crtPage",required = false,defaultValue = "1")  int crtPage,
+						@RequestParam(value = "keyword",required = false,defaultValue = "") String keyword,Model model) {
+		System.out.println("BulletinController.List4()");
+				
+		Map<String, Object> pMap = bulletinService.list4(crtPage,keyword);
+		System.out.println(pMap); 
+		model.addAttribute("pMap",pMap);
+		
+		return "/WEB-INF/views/bulletin/list4.jsp";
+		
+	}	
+	//게시판 페이징 기술 포함*	
+	@RequestMapping(value = "/bulletin/list3",method = {RequestMethod.GET,RequestMethod.POST})
+	public String List3(@RequestParam(value="crtPage",required = false,defaultValue = "1")  int crtPage, Model model) {
+		System.out.println("BulletinController.List3()");
+				
+		Map<String, Object> pMap = bulletinService.list3(crtPage);
+		System.out.println(pMap); 
+		model.addAttribute("pMap",pMap);
+		
+		return "/WEB-INF/views/bulletin/list3.jsp";
+		
+	}	
 	
 	 @RequestMapping(value = "/bulletin/list",method = {RequestMethod.GET,RequestMethod.POST}) 
 	 public String List(Model model) { 
@@ -111,9 +140,13 @@ public class BulletinController {
 		bulletinVo.setUser_no(bulletinUser.getNo());
 //			System.out.println(bulletinUser.getNo());
 //			System.out.println(bulletinVo);
-		bulletinService.write(bulletinVo);
-
-		return "redirect:/bulletin/list";
+		
+		for(int i=1; i<123;i++) {			
+			String str = i + "번째 글입니다.";
+			bulletinVo.setTitle(str);			
+			bulletinService.write(bulletinVo);
+		}		
+		return "redirect:/bulletin/list3";
 	}
 
 	@RequestMapping("bulletin/viewForm")

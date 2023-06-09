@@ -44,20 +44,10 @@ public class GalleryController {
 	public JsonResult view(@RequestParam("no") int no,  Model model,HttpSession session) {
 		System.out.println("GalleryController.view()");
 		
-		JsonResult jsonResult = new JsonResult();
-		GalleryVo galleryVo = new GalleryVo();
-		UserVo bulletinUser = (UserVo) session.getAttribute("successUser");
-		galleryVo = galleryServise.view(no);
-		try {			
-			galleryVo.setSessionName(bulletinUser.getName());	
-			jsonResult.success(galleryVo);
-		} catch (Exception e) {
-			e.printStackTrace();			
-		}
+		JsonResult jsonResult = new JsonResult();		
+		jsonResult.success(galleryServise.view(no));
 		
-		jsonResult.success(galleryVo);		
-		System.out.println(galleryVo);
-		System.out.println(jsonResult);
+		System.out.println(jsonResult);		
 		
 		return jsonResult;
 		

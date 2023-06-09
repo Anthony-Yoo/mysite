@@ -4,6 +4,108 @@
 <mapper namespace="bulletin">
 
 	<!-- 쿼리문작성 -->
+	<select id="totalCount" resultType="int">
+		<![CDATA[
+			select count(*)
+			from bulletin		
+		]]>
+	</select>
+	<!-- 게시글리스트 조회 -->
+	<select id="List4" parameterType="map" resultType="com.mysite.vo.BulletinVo">
+		<![CDATA[
+			select  rn,
+			        ort.no,
+			        ort.title,
+			        ort.content,
+			        ort.hit,
+			        ort.reg_date,
+			        ort.user_no,
+			        ort.name        
+			from   (select  rownum rn,
+			                ot.no,
+			                ot.title,
+			                ot.content,
+			                ot.hit,
+			                ot.reg_date,
+			                ot.user_no,
+			                ot.name
+			        from  (select   b.no,
+			                        b.title,
+			                        b.content,
+			                        b.hit,  
+			                        b.reg_date,
+			                        b.user_no,
+			                        u.name
+			                from bulletin b 
+			                join users u
+			                on b.user_no = u.no
+		]]>						                
+					<if test="keyword !='' and keyword != 'null'" >
+							where (bulletin.title || bulletin.content || users.name) like '%'|| #{keyword} ||'%'	
+					</if>
+		<![CDATA[		
+			                order by no DESC) ot
+			        ) ort
+			where rn >= #{startRnum}
+			AND rn <= #{endRnum}
+		]]>	
+	</select>
+	
+	
+	<!-- 게시글리스트 조회 -->
+	<select id="List3" parameterType="map" resultType="com.mysite.vo.BulletinVo">
+		<![CDATA[
+			select  rn,
+			        ort.no,
+			        ort.title,
+			        ort.content,
+			        ort.hit,
+			        ort.reg_date,
+			        ort.user_no,
+			        ort.name        
+			from   (select  rownum rn,
+			                ot.no,
+			                ot.title,
+			                ot.content,
+			                ot.hit,
+			                ot.reg_date,
+			                ot.user_no,
+			                ot.name
+			        from  (select   b.no,
+			                        b.title,
+			                        b.content,
+			                        b.hit,  
+			                        b.reg_date,
+			                        b.user_no,
+			                        u.name
+			                from bulletin b 
+			                join users u
+			                on b.user_no = u.no
+			                order by no DESC) ot
+			        ) ort
+			where rn >= #{startRnum}
+			AND rn <= #{endRnum}
+		]]>	
+	</select>
+	
+	<!-- 검색 카운트 -->
+	<select id="selectCount2" parameterType="String" resultType="int">
+		<![CDATA[
+		
+				select count(*) as totalCount
+				from bulletin
+				join users 
+				on users.no = bulletin.user_no			
+		]]>			 
+			<if test="value !='' and value != 'null'" >
+			where (bulletin.title || bulletin.content || users.name) like '%'|| #{keyword} ||'%'	
+			</if>
+		<![CDATA[			
+			Order by bulletin.no DESC 		
+		]]>
+	</select>
+	
+	
 	<!-- 게시글 카운트 -->
 	<select id="selectCount" resultType="int">
 		<![CDATA[
@@ -52,7 +154,7 @@
 	<!-- 페이징게시글리스트 조회 -->
 	<select id="pagingList" parameterType="com.mysite.vo.BulletinVo" resultType="com.mysite.vo.BulletinVo">
 		<![CDATA[
-						select  bulletin.no,
+					select  bulletin.no,
         			bulletin.title,
         			users.name,
         			bulletin.hit,
@@ -109,11 +211,11 @@
 	<!-- 키워드 조회글리스트 -->
 	<select id="selectKeyword" parameterType="String" resultType="com.mysite.vo.BulletinVo">
 		<![CDATA[
-			select  bulletin.no,
-        			bulletin.title,
-        			users.name,
-        			bulletin.hit,
-        			bulletin.reg_date
+					select  bulletin.no,
+        					bulletin.title,
+        					users.name,
+        					bulletin.hit,
+        					bulletin.reg_date
 					from bulletin
 					join users 
 					on users.no = bulletin.user_no			

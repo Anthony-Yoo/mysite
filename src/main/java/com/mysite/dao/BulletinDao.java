@@ -1,6 +1,9 @@
 package com.mysite.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +16,47 @@ public class BulletinDao {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	public List<BulletinVo> List4(int startRnum,int endRnum,String keyword) {
+		System.out.println("BulletinDao.selectList()");
+		System.out.println(startRnum+" "+endRnum);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startRnum", startRnum);
+		map.put("endRnum", endRnum);
+		map.put("keyword",keyword);
+		
+		List<BulletinVo> bulletinlist = sqlsession.selectList("bulletin.List4",map);
+		System.out.println(bulletinlist);		
+		
+		return bulletinlist;
+	}
+	
+	public List<BulletinVo> List3(int startRnum,int endRnum) {
+		System.out.println("BulletinDao.selectList()");
+		System.out.println(startRnum+" "+endRnum);
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("startRnum", startRnum);
+		map.put("endRnum", endRnum);
+		
+		List<BulletinVo> bulletinlist = sqlsession.selectList("bulletin.List3",map);
+		System.out.println(bulletinlist);
+		
+		
+		return bulletinlist;
+	}
+	public int selectCount(String keyword) {
+		System.out.println("BulletinDao.selectCount()");
+		
+		return sqlsession.selectOne("bulletin.selectCount2",keyword);		
+	}
+	
+	public int totalCount() {
+		System.out.println("BulletinDao.totalCount()");
+		
+		return sqlsession.selectOne("bulletin.totalCount");
+		
+	}
 	public int selectCount() {
 		System.out.println("BulletinDao.selectCount()");
 		

@@ -191,7 +191,7 @@ $(".view").on("click",function(){
 												
 				$('#viewModelImg').attr("src",'${pageContext.request.contextPath}/upload/' + jsonResult.data.saveName );				
 				$('#viewModelContent').html(jsonResult.data.content);
-				if(jsonResult.data.sessionName == jsonResult.data.userName){
+				if("${sessionScope.successUser.name}" == jsonResult.data.userName){					
 					$("#btnDel").show();				
 				}else {
 					console.log("세션정보 불일치");
